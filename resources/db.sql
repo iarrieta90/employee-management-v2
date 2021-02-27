@@ -6,4 +6,4 @@ PRIMARY KEY(user_no)
 );
 
 INSERT INTO  users (email, password) VALUES
-('irati@gmail.com', md5('12345'));
+('admin@assemblerschool.com', md5('12345'));

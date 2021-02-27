@@ -1,6 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap');
+@import "./employee.css";
+@import "./error.css";
+@import "./login.css";
+@import "./nav.css";
 
-/* Main */
+
 * {
     margin: 0;
     padding: 0;

@@ -1,34 +1,35 @@
 <?php
 
-class App {
+class App
+{
 
     function __construct()
     {
-        $archivoController = 'controllers/login.php';
-        require_once $archivoController;
-        $controller = new Login();
 
-        if($controller->checkLogin()){
-            $controller->loadModel('login');
-            $controller->render('dashboard/index');
-        } else {
-            $controller->render('login/index');
-        }
-
-
-
-
-        $url = isset($_GET['url'])? $_GET['url'] : null;
+        $url = isset($_GET['url']) ? $_GET['url'] : null;
         $url = rtrim($url, '/');
         $url = explode('/', $url);
 
-        if(empty($url[0])){
-            
+        if (!isset($_SESSION['id'])) {
+            $controllerPath = 'controllers/login.php';
+            require_once $controllerPath;
+            $controller = new Login();
+            $controller->loadModel('loginModel');
+            if(isset($_POST['submit'])){
+                $controller->checkLogin($_POST['email'], $_POST['password']);
+            }  
+            $controller->render('login/index');
+        } else {
+            if (empty($url[0])) {
+                $controllerPath = 'controllers/dashboard.php';
+                require_once $controllerPath;
+                $controller = new Dashboard();
+                $controller->loadModel('dashboardModel');
+                $controller->render('dashboard/index');
+            } else {
+
+            }
+        
         }
-
     }
-
-
-
-
 }

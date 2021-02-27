@@ -1,7 +1,7 @@
 var selectedRow = null;
 
-const employeeForm = document.getElementById("employeeInfo")
-employeeForm.addEventListener("submit", onFormSubmit)
+const employeeForm = document.getElementById("employeeInfo");
+employeeForm.addEventListener("submit", onFormSubmit);
 
 
 
