@@ -8,18 +8,23 @@
         }
 
         public function get($email,$password){
-            $user = new User();
+            // $users= [];
             try {
-                $query = $this->db->connect()->prepare('SELECT * FROM users WHERE email=:email AND password=:password');
-                $query->execute(['email' => $email, 'password' => $password]);
-
-                while($dataUser = $query->fetch()){
-                    $user->id = $dataUser['user_no'];
-                    $user->email = $dataUser['email'];
-                    $user->password = $dataUser['password'];
-                }
-
-                return $user;
+                $query = $this->db->connect()->prepare('SELECT * FROM users WHERE email = :email');
+                $query->execute(['email' => $email]);
+                $dataUser = $query->fetch();
+                if(password_verify($password, $dataUser['password']))
+                print_r($dataUser);
+                //     echo "hello fetch";
+                //     $user = new User();
+                //     $user->id = $dataUser['user_no'];
+                //     $user->email = $dataUser['email'];
+                //     $user->password = $dataUser['password'];
+                //     print_r($dataUser['user_no']);
+                //     array_push($users, $user);
+                
+                // print_r($users);
+                return $dataUser;
 
             } catch(PDOException $e) {
                 print_r('Connection error: ' . $e->getMessage()); 
@@ -29,8 +34,7 @@
 
         function startSession($userLogin){
             session_start();
-            $_SESSION['id'] = $userLogin['user_no'];
-            $_SESSION['email'] = $userLogin['email'];
+            $_SESSION['id'] = $userLogin['id'];
             $_SESSION['start'] = time();
             $_SESSION['duration'] = 600;
         }

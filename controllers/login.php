@@ -2,14 +2,15 @@
 
 <?php
     require_once('login.php');
-    
 
-    class Login extends Controller 
+
+    class Login extends Controller
     {
         function __construct()
         {
             parent::__construct();
-            $this->view = new View();
+            // $this->view = new View();
+            $this->view->mensaje = "";
         }
 
 
@@ -17,11 +18,13 @@
            $email =  $sessionEmail;
            $password =  $sessionPassword;
            $userLogin = $this->model->get($email, $password);
-            if($userLogin != null){
+           print_r($userLogin);
+           if($userLogin != null){
                 $this->model->startSession($userLogin);
                 $this->view->render('dashboard/index');
             } else {
                 $this->view->message = "Login incorrect";
+                echo "login incorrect";
                 $this->view->render('login/index');
             }
 
@@ -36,7 +39,6 @@
         }
 
     }
-    
 
 
 
@@ -46,5 +48,6 @@
 
 
 
-    
+
+
 ?>
