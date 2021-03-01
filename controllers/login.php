@@ -9,33 +9,30 @@
         function __construct()
         {
             parent::__construct();
-            // $this->view = new View();
             $this->view->mensaje = "";
         }
 
 
-        function checkLogin($sessionEmail, $sessionPassword){
-           $email =  $sessionEmail;
-           $password =  $sessionPassword;
-           $userLogin = $this->model->get($email, $password);
-           print_r($userLogin);
-           if($userLogin != null){
-                $this->model->startSession($userLogin);
-                $this->view->render('dashboard/index');
-            } else {
-                $this->view->message = "Login incorrect";
-                echo "login incorrect";
-                $this->view->render('login/index');
+        function checkLogin(){
+            if(isset($_POST['email']) && isset($_POST['password'])){
+                if($userLogin = $this->model->get($_POST['email'], $_POST['password'])){
+                     $this->model->startSession($userLogin);
+                     header('Location:' . URL . 'dashboard');
+                 } else {
+                     $this->view->message = "Login incorrect";
+                     echo "login incorrect";
+                     $this->view->render();
+                 }
+     
             }
-
+           
 
         }
 
+        
 
-
-
-        function render($direction){
-            $this->view->render($direction);
+        function render(){
+            $this->view->render('login/index');
         }
 
     }

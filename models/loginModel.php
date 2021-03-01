@@ -8,23 +8,17 @@
         }
 
         public function get($email,$password){
-            // $users= [];
+         
             try {
                 $query = $this->db->connect()->prepare('SELECT * FROM users WHERE email = :email');
                 $query->execute(['email' => $email]);
                 $dataUser = $query->fetch();
-                if(password_verify($password, $dataUser['password']))
-                print_r($dataUser);
-                //     echo "hello fetch";
-                //     $user = new User();
-                //     $user->id = $dataUser['user_no'];
-                //     $user->email = $dataUser['email'];
-                //     $user->password = $dataUser['password'];
-                //     print_r($dataUser['user_no']);
-                //     array_push($users, $user);
-                
-                // print_r($users);
-                return $dataUser;
+                if(password_verify($password, $dataUser['password'])){
+                    return $dataUser;
+                } else {
+                    echo "incorrect email or password";
+                    return false;
+                }
 
             } catch(PDOException $e) {
                 print_r('Connection error: ' . $e->getMessage()); 
@@ -37,6 +31,15 @@
             $_SESSION['id'] = $userLogin['id'];
             $_SESSION['start'] = time();
             $_SESSION['duration'] = 600;
+        }
+
+        function closeUserSession($sessionTime, $sessionDuration){
+            if($sessionTime >= $sessionDuration){
+                session_start();
+                session_destroy();
+                header("Location: ../index.php");
+                exit();
+            }
         }
 
 
