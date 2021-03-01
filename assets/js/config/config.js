@@ -1,0 +1,1 @@
+export const URL = 'http://localhost/assembler/employee-management-v2/';

@@ -1,5 +1,6 @@
 <?php
 
+require_once 'controllers/errors.php';
 class App
 {
 
@@ -10,9 +11,8 @@ class App
         $url = rtrim($url, '/');
         $url = explode('/', $url);
 
-        $nparam = count($url);
-        $login = new Session();
-        var_dump($login);
+        // $login = new Session();
+        // var_dump($login);
 
         // if ($login->isLoggedIn($url[0].'/checkLogin')) {
             if (empty($url[0])) {
@@ -37,12 +37,12 @@ class App
                   } else {
                     $controller->render();
                   }
+                } else{
+                    $controller = new Errors();
                 }
             }
 
-        // else{
-        //     $controller = new Errores();
-        // }
+        
         // } else {
         //     $controllerPath = 'controllers/login.php';
         //     require_once $controllerPath;

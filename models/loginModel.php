@@ -1,5 +1,4 @@
 <?php
-    include_once 'models/user.php';
     class LoginModel extends Model {
 
         function __construct()

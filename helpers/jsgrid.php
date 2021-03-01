@@ -11,7 +11,7 @@
     <title>Inline table</title>
 </head>
 <body>
-    <section class="jsGrid">
+    <section class="">
         <div id="jsGrid"></div>
     </section>
 </body>
