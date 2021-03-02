@@ -1,10 +1,9 @@
 import { deleteMethod } from '../api_methods/delete.js';
 import { postMethod } from '../api_methods/post.js';
 import { putMethod } from '../api_methods/put.js';
-import {URL} from '../config/config.js';
 
 export const helpers = {
-  grid: function (employeeList) {
+  grid: function (employeesList) {
     return {
       width: '100%',
       height: 'auto',
@@ -14,11 +13,11 @@ export const helpers = {
       paging: true,
       datatype: 'json',
       deleteConfirm: 'Do you really want to delete the client?',
-      data: employeeList,
+      data: employeesList,
 
       onItemDeleting: function (args) {
         deleteMethod
-        .url(`${URL}dashboard/deleteEmployee`, args.item.id)
+        .url('deleteEmployee', args.item.id)
         .done(() => {
           $('.toast-msg').html(`
               <div class='toast' role='alert' aria-live='assertive' aria-atomic='true'>
@@ -37,7 +36,7 @@ export const helpers = {
       },
       onItemInserting: function (args) {
         postMethod
-          .url(`${URL}dashboard/createEmployee`, args.item)
+          .url('createEmployee', args.item)
           .done(data => {
                 args.item.id = data;
                 args.item.lastName = '';
@@ -59,7 +58,7 @@ export const helpers = {
       },
       onItemUpdating: function (args) {
         putMethod
-          .url(`${URL}dashboard/updateEmployee`, args.item)
+          .url('updateEmployee', args.item)
           .done(() => {
             $('.toast-msg').html(`
                 <div class='toast' role='alert' aria-live='assertive' aria-atomic='true'>

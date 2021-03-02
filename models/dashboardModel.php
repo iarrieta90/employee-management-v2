@@ -15,10 +15,9 @@ class DashboardModel extends Model
 
             $query = $this->db->connect()->query("SELECT*FROM employees");
 
-            $employeesList = $query->fetchAll();
-            $employeesList = json_encode($employeesList);
-            
+            $employeesList = $query->fetchAll(PDO::FETCH_ASSOC);
             return $employeesList;
+
         } catch (PDOException $e) {
             print_r('Connection error: ' . $e->getMessage());
             return null;

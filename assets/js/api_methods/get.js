@@ -1,11 +1,10 @@
 export const getMethod = {
-  url: function (pathToSend, data) {
+  url: function (pathToSend, data="") {
     const request = {
-      url: pathToSend,
+      url: `${URL}dashboard/${pathToSend}`,
       data: data,
       type: 'GET',
     };
-    console.log(request);
     return $.ajax(request);
   },
 };
