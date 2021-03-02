@@ -37,10 +37,8 @@ export const helpers = {
       onItemInserting: function (args) {
         postMethod
           .url('createEmployee', args.item)
-          .done(data => {
-                args.item.id = data;
-                args.item.lastName = '';
-                args.item.gender = '';
+          .done(() => {
+              console.log(args.item);
                 $('.toast-msg').html(`
                 <div class='toast' role='alert' aria-live='assertive' aria-atomic='true'>
                   <div class='toast-body'>
@@ -76,7 +74,7 @@ export const helpers = {
           });
       },
       rowClick: function (args) {
-        window.location.href = `${URL}dashboard/showEmployee/${args.item.id}`;
+        window.location.href = `${URL}dashboard/employee/${args.item.id}`;
       },
 
       fields: [

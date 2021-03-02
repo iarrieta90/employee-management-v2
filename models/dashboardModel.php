@@ -8,7 +8,7 @@ class DashboardModel extends Model
         parent::__construct();
     }
 
-    function getEmployees()
+    function get()
     {
 
         try {
@@ -24,19 +24,38 @@ class DashboardModel extends Model
         }
     }
 
-    function deleteEmployee()
+    function delete()
+    {
+    }
+    function create($newEmployee)
+    {
+        try {
+            $query = $this->db->connect()->prepare("INSERT INTO employees (name, email, age, streetAddress, city, state, postalCode, phoneNumber) VALUE (name = :name, email = :email, age = :age, streetAddress = :streetAddress, city = :city, state = :state, postalCode = :postalCode, phoneNumber = :phoneNumber)");
+
+            $query->execute(
+                [
+                    'name' => $newEmployee[0],
+                    'email' => $newEmployee[1],
+                    'age' => $newEmployee[2],
+                    'streetAddress' => $newEmployee[3],
+                    'city' => $newEmployee[4],
+                    'state' => $newEmployee[5],
+                    'postalCode' => $newEmployee[6],
+                    'phoneNumber' => $newEmployee[7]
+
+                ]);
+                return true;
+        } catch (PDOException $e) {
+            print_r('Connection error: ' . $e->getMessage());
+            return false;
+        }
+    }
+
+    function update()
     {
     }
 
-    function createEmployee()
-    {
-    }
-
-    function updateEmployee()
-    {
-    }
-
-    function showEmployee()
+    function employee()
     {
     }
 

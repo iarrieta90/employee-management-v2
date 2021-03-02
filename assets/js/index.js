@@ -4,7 +4,6 @@ import { helpers } from './helpers/helpers.js';
 getMethod
   .url('getEmployees')
   .then(data => {
-    console.log(data);
     $('#main-wrapper').jsGrid(helpers.grid(data));
     // $('.input_avatar').last().prop('checked',true);
 
