@@ -30,20 +30,22 @@ class DashboardModel extends Model
     function create($newEmployee)
     {
         try {
-            $query = $this->db->connect()->prepare("INSERT INTO employees (name, email, age, streetAddress, city, state, postalCode, phoneNumber) VALUE (name = :name, email = :email, age = :age, streetAddress = :streetAddress, city = :city, state = :state, postalCode = :postalCode, phoneNumber = :phoneNumber)");
+            $query = $this->db->connect()->prepare("INSERT INTO employees 
+            (name, email, age, streetAddress, city, state, postalCode, phoneNumber) VALUES 
+            (:name, :email, :age, :streetAddress, :city, :state, :postalCode, :phoneNumber)");
 
             $query->execute(
                 [
-                    'name' => $newEmployee[0],
-                    'email' => $newEmployee[1],
-                    'age' => $newEmployee[2],
-                    'streetAddress' => $newEmployee[3],
-                    'city' => $newEmployee[4],
-                    'state' => $newEmployee[5],
-                    'postalCode' => $newEmployee[6],
-                    'phoneNumber' => $newEmployee[7]
-
-                ]);
+                    'name' => $newEmployee['name'],
+                    'email' => $newEmployee['email'],
+                    'age' => $newEmployee['age'],
+                    'streetAddress' => $newEmployee['streetAddress'],
+                    'city' => $newEmployee['city'],
+                    'state' => $newEmployee['state'],
+                    'postalCode' => $newEmployee['PC'],
+                    'phoneNumber' => $newEmployee['phoneNumber'],
+                ]
+            );
                 return true;
         } catch (PDOException $e) {
             print_r('Connection error: ' . $e->getMessage());

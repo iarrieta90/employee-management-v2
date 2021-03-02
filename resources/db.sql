@@ -47,3 +47,7 @@ INSERT INTO `employees` (`name`, `lastName`, `email`, `gender`, `age`, `streetAd
 ('Brad', 'Simpson', 'brad@foo.com', 'man', 40, '128', 'Atlanta', 'GEO', '394221', '6854634522'),
 ('Neil', 'Walker', 'walkerneil@baz.com', 'man', 42, '1', 'Nashville', 'TN', '90143', '45372788192'),
 ('Robert', 'Thomson', 'robertemployees@network.com', 'man', 24, '126', 'New Orleans', 'LU', '63281', '91232876454');
+
+INSERT INTO employees 
+(name, email, age, streetAddress, city, state, postalCode, phoneNumber) VALUES 
+('hola', 'hola@gmail.com', '22', '12st', 'Salt Lake', 'CA', 11081, 879038374);
