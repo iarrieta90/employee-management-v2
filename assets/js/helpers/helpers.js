@@ -38,7 +38,6 @@ export const helpers = {
         postMethod
           .url('createEmployee', args.item)
           .done(() => {
-              console.log(args.item);
                 $('.toast-msg').html(`
                 <div class='toast' role='alert' aria-live='assertive' aria-atomic='true'>
                   <div class='toast-body'>
@@ -57,11 +56,11 @@ export const helpers = {
       onItemUpdating: function (args) {
         putMethod
           .url('updateEmployee', args.item)
-          .done(() => {
+          .done((message) => {
             $('.toast-msg').html(`
                 <div class='toast' role='alert' aria-live='assertive' aria-atomic='true'>
                   <div class='toast-body'>
-                    Employee updated correctly
+                    ${message}
                   </div>
                 </div>
                 

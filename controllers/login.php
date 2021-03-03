@@ -9,7 +9,7 @@
         function __construct()
         {
             parent::__construct();
-            $this->view->mensaje = "";
+            $this->view->message = "";
         }
 
 
@@ -23,10 +23,7 @@
                      echo "login incorrect";
                      $this->view->render();
                  }
-     
             }
-           
-
         }
 
         

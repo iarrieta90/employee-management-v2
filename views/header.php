@@ -4,9 +4,6 @@
     </section>
     <ul class="nav-links">
         <li>
-            <a href="<?=URL?>login?logout='true'">Login</a>
-        </li>
-        <li>
             <a href="<?=URL?>dashboard">Dashboard</a>
         </li>
         <li>

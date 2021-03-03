@@ -7,6 +7,7 @@ class Dashboard extends Controller
     function __construct()
     {
         parent::__construct();
+        $this->view->message = "";
     }
 
     function render()
@@ -22,27 +23,35 @@ class Dashboard extends Controller
 
     }
     function createEmployee() {
-        print_r($_POST);
-        $this->model->create($_POST);
+        $this->view->message = $this->model->create($_POST) ? "employee created correctly" : "employee couldn't be created";
+        if(isset($_POST['employeeProfile'])){
+            $this->view->render('dashboard/index');
+        } else {
+            echo $this->view->message;
+        }
     }
 
     function deleteEmployee() {
         $query = $this->model->getQueryStringParameters();
-        print_r($query['data']);
-        $this->model->delete($query['data']);
+        $this->view->message = $this->model->delete($query['data']) ? "employee deleted correctly" : "employee couldn't be deleted";
+        $this->render();
+
     }
 
     function updateEmployee() {
         $query = $this->model->getQueryStringParameters();
-        print_r($query);
-        $this->model->update($query);
+        $this->view->message = $this->model->update($query) ? "employee updated correctly" : "employee couldn't be updated";
+        if(isset($query['employeeProfile'])){
+            $this->render();
+        } else {
+            echo $this->view->message;
+        }
     }
 
     function employee($param = null) {
         if($param) {
             $id = $param[0];
             $employee = $this->model->getById($id);
-            echo '<br>';
             foreach ($employee as $key) {
                 $employee = $key;
             }
@@ -62,11 +71,10 @@ class Dashboard extends Controller
         switch ($_SERVER['REQUEST_METHOD']) {
             case 'PUT':
                 $this->updateEmployee();
-                header('Location:' . URL . 'dashboard');
             break;
             case 'POST':
                 $this->createEmployee();
-                header('Location:' . URL . 'dashboard');
+
             break;
         }
     }
