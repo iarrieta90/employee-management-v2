@@ -22,7 +22,7 @@
     <?php require_once 'controllers/dashboard.php'; ?>
     <section id="form-wrapper">
         <div class="container overflow-hidden">
-            <form class="needs-validation" action="./library/employeeController.php" method="POST">
+            <form class="needs-validation" action="<?=URL?>dashboard/employeeProfile" method="POST">
             <h4 class="mb-3"><?= isset($this->employee) ? $this->employee['name'] . "'s profile" : "New employee" ?></h4>
             <input type="hidden" name="_method" value="<?= isset($this->employee) ? "PUT" : "POST" ?>">
             <div class="row">
@@ -85,7 +85,7 @@
             </div>
             <input type="hidden" name="id" value="<?= isset($this->employee) ? $this->employee['id'] : '' ?>" >
 
-            <input type="submit" class="w-30 btn btn-dark mt-5 mr-3" value="<?= isset($this->employee) ? 'Update' : 'Create' ?>" name="employeePage">
+            <input type="submit" class="w-30 btn btn-dark mt-5 mr-3" value="<?= isset($this->employee) ? 'Update' : 'Create' ?>" name="employeeProfile">
             <a class="w-30 btn btn-dark mt-5" href="<?=URL?>dashboard">Go Back</a>
             </form>
         </div>

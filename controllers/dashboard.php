@@ -9,6 +9,11 @@ class Dashboard extends Controller
         parent::__construct();
     }
 
+    function render()
+    {
+        $this->view->render('dashboard/index');
+    }
+
     function getEmployees(){
         $employeesList =  $this->model->getAll();
         $employeesList = json_encode($employeesList);
@@ -32,10 +37,6 @@ class Dashboard extends Controller
         $this->model->update($query);
     }
 
-    function render()
-    {
-        $this->view->render('dashboard/index');
-    }
     function employee($param = null) {
         $id = $param[0];
         $employee = $this->model->getById($id);
@@ -46,6 +47,25 @@ class Dashboard extends Controller
         $this->view->employee = $employee;
         $this->view->render('employee/index');
     }
+
+    function employeeProfile()
+    {
+        if(isset($_REQUEST['_method'])) {
+            $_SERVER['REQUEST_METHOD'] = $_REQUEST['_method'];
+            array_splice($_REQUEST, array_search('_method', array_keys($_REQUEST)), 1);
+        }
+        switch ($_SERVER['REQUEST_METHOD']) {
+            case 'PUT':
+                $this->updateEmployee();
+                $this->render('dashboard/index');
+            break;
+            case 'POST':
+                $this->createEmployee();
+                $this->render('dashboard/index');
+            break;
+        }
+    }
+
 }
 
 ?>
