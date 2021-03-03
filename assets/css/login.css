@@ -43,6 +43,7 @@ input[type=email]:focus, input[type=password]:focus, input[type=submit]:focus, i
     font-weight: 700;
     border-radius: 5px;
     border: 2px solid rgb(226, 226, 226);
+    color: var(--light-grey);
     background-color: transparent;
 }
 

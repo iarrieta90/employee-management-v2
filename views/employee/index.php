@@ -1,116 +1,94 @@
-<!-- TODO Employee view -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Employee</title>
-    <link rel="stylesheet" href="../assets/css/employee.css">
-    <link rel="stylesheet" href="../assets/css/main.css">
-    <link rel="stylesheet" href="../assets/css/login.css">
-    <link rel="stylesheet" href="../assets/css/error.css">
-    <link rel="stylesheet" href="../assets/css/nav.css">
+    <title>Dashboard</title>
+    <script src="<?=URL?>node_modules/jquery/dist/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="<?=URL?>node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="<?=URL?>node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="<?=URL?>node_modules/jsgrid/css/theme.css">
+    <link rel="stylesheet" href="<?=URL?>node_modules/jsgrid/css/jsgrid.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="<?= URL ?>assets/css/main.css">
+
 </head>
+
 <body>
-    <?php include_once('../assets/html/header.html'); ?>
-    <?php
-        include_once("./library/sessionHelper.php");
+    <?php include_once 'views/header.php'; ?>
+    <?php require_once 'controllers/dashboard.php'; ?>
+    <section id="form-wrapper">
+        <div class="container overflow-hidden">
+            <form class="needs-validation" action="./library/employeeController.php" method="POST">
+            <h4 class="mb-3"><?= isset($this->employee) ? $this->employee['name'] . "'s profile" : "New employee" ?></h4>
+            <input type="hidden" name="_method" value="<?= isset($this->employee) ? "PUT" : "POST" ?>">
+            <div class="row">
+                <div class="col-sm-6 p-2">
+                <label for="uName" class="form-label">First name</label>
+                <input type="text" class="form-control" id="uName" name="name" placeholder="" value="<?= isset($this->employee) ? $this->employee['name']: '' ?>" required="">
+                <div class="invalid-feedback">
+                    Valid first name is required.
+                </div>
+                </div>
 
-        session_start();
-        $sessionStart = $_SESSION["start"];
-        $sessionDuration = $_SESSION["duration"];
-        $sessionTime = time() - $sessionStart;
+                <div class="col-sm-6 p-2">
+                <label for="uLastName" class="form-label">Last name</label>
+                <input type="text" class="form-control" id="uLastName" name="lastName" placeholder="" value="<?= isset($this->employee) ? $this->employee['lastName'] : '' ?>" required="">
+                </div>
 
-        if(!isset($_SESSION["id"])){
-            header("Location: ../index.php");
-        }
-        else {
-            echo $_GET['userId'];
-            closeUserSession($sessionTime, $sessionDuration);
-        }
-    ?>
-    <?php if (isset($_GET['employee'])) {
-            $employeeCheck = $_GET['employee'];
-            if (strpos($employeeCheck, 'Success') !== false) {
-                echo '<aside class="success_message">
-                        <p class="error">'.$employeeCheck.'</p>
-                    </aside>';
-            }
-            else {
-                echo '<aside class="error_message">
-                        <p class="error">'.$employeeCheck.'</p>
-                    </aside>';
-            }
-        }
-    ?>
-    <?php if (isset($_GET['userId'])) {
-            if (($_GET['userId']) !== "") {
-                $userId = $_GET['userId'];
-            }
-            else {
-                $userId = 1;
-            }
-        }
-        else {
-            $userId = 1;
-        }
-    ?>
-    <?php
-    include_once('./library/employeeManager.php');
-    ?>
-    <section class="section-employee">
-        <form action="./library/employeeController.php?userID=<?= $userId?>" method="POST" class="employee" id="employee">
-            <div class="employee__grupo" id="grupo__name">
-                <label for="name" class="employee__label">First name</label>
-                <input type="hidden" name="id" id="id" value="<?=getEmployee($userId)['id']?>">
-                <input type="text" class="employee__input" name="name" id="name" value="<?=getEmployee($userId)['name']?>">
-            </div>
-            <div class="employee__grupo" id="grupo__lastName">
-                <label for="lastName" class="employee__label">Last name</label>
-                <input type="text" class="employee__input" name="lastName" id="lastName" value="<?=getEmployee($userId)['lastName']?>">
-            </div>
-            <div class="employee__grupo" id="grupo__email">
-                <label for="email" class="employee__label">Email address</label>
-                <input type="email" class="employee__input" name="email" id="email" value="<?=getEmployee($userId)['email']?>">
-            </div>
-            <div class="employee__grupo" id="grupo__gender">
-                <label for="gender" class="employee__label">Gender</label>
-                <select name="gender" class="employee__input">
-                    <option value="man" <?=(getEmployee($userId)["gender"] == "man") ? "selected" : ""?>>man</option>
-                    <option value="woman" <?=(getEmployee($userId)["gender"] == "woman") ? "selected" : ""?>>woman</option>
+                <div class="col-sm-6 p-2">
+                <label for="uEmail" class="form-label">Email</label>
+                <input type="email" class="form-control" id="uEmail" name="email" value="<?= isset($this->employee) ? $this->employee['email'] : '' ?>" required="">
+                </div>
+                <div class="col-sm-6 p-2">
+                <label for="uGender" class="form-label">Gender</label><br>
+                <select class="form-control" id="uGender" name="gender" required>
+                    <option value="man" <?= isset($this->employee) ? ($this->employee['gender'] == "man" ? "selected" : "") : '' ?>>Man</option>
+                    <option value="woman" <?= isset($this->employee) ? ($this->employee['gender'] == "woman" ? "selected" : "") : '' ?>>Woman</option>
+                    <option value="nobinary" <?= isset($this->employee) ? ($this->employee['gender'] == "nobinary" ? "selected" : "") : '' ?>>No binary</option>
                 </select>
+                </div>
+
+                <div class="col-md-6 p-2">
+                <label for="uAddress" class="form-label">Street Address</label>
+                <input type="text" class="form-control" id="uAddress" name="streetAddress" required value="<?= isset($this->employee) ? $this->employee['streetAddress'] : '' ?>">
+                </div>
+
+                <div class="col-sm-6 p-2">
+                <label for="uState" class="form-label">State</label>
+                <input type="text" class="form-control" id="uState" name="state" value="<?= isset($this->employee) ? $this->employee['state'] : '' ?>">
+                </div>
+
+
+                <div class="col-sm-6 p-2">
+                <label for="uCity" class="form-label">City</label>
+                <input type="text" class="form-control" id="uCity" name="city" value="<?= isset($this->employee) ? $this->employee['city'] : '' ?>">
+                </div>
+
+                <div class="col-md-6 p-2">
+                <label for="uAge" class="form-label">Age</label>
+                <input type="number" class="form-control" id="uAge" name="age" required value="<?= isset($this->employee) ? $this->employee['age'] : '' ?>">
+                </div>
+
+                <div class="col-sm-6 p-2">
+                <label for="uPC" class="form-label">Postal Code</label>
+                <input type="number" class="form-control" id="uPC" name="postalCode" required value="<?= isset($this->employee) ? $this->employee['postalCode'] : '' ?>">
+                </div>
+
+                <div class="col-sm-6 p-2">
+                <label for="uPhoneNumber" class="form-label">Phone Number</label>
+                <input type="number" class="form-control" id="uPhoneNumber" name="phoneNumber" required value="<?= isset($this->employee) ? $this->employee['phoneNumber'] : '' ?>">
+                </div>
             </div>
-            <div class="employee__grupo" id="grupo__city">
-                <label for="city" class="employee__label">City</label>
-                <input type="text" class="employee__input" name="city" id="city" value="<?=getEmployee($userId)['city']?>">
-            </div>
-            <div class="employee__grupo" id="grupo__streetAddress">
-                <label for="streetAddress" class="employee__label">Street address</label>
-                <input type="text" class="employee__input" name="streetAddress" id="streetAddress" value="<?=getEmployee($userId)['streetAddress']?>">
-            </div>
-            <div class="employee__grupo" id="grupo__state">
-                <label for="state" class="employee__label">State</label>
-                <input type="text" class="employee__input" name="state" id="state" value="<?=getEmployee($userId)['state']?>">
-            </div>
-            <div class="employee__grupo" id="grupo__age">
-                <label for="age" class="employee__label">Age</label>
-                <input type="text" class="employee__input" name="age" id="age" value="<?=getEmployee($userId)['age']?>">
-            </div>
-            <div class="employee__grupo" id="grupo__postalCode">
-                <label for="postalCode" class="employee__label">Postal code</label>
-                <input type="text" class="employee__input" name="postalCode" id="postalCode" value="<?=getEmployee($userId)['postalCode']?>">
-            </div>
-            <div class="employee__grupo" id="grupo__phoneNumber">
-                <label for="phoneNumber" class="employee__label">Phone number</label>
-                <input type="text" class="employee__input" name="phoneNumber" id="phoneNumber" value="<?=getEmployee($userId)['phoneNumber']?>">
-            </div>
-            <div class="employee__grupo employee__grupo-btn-enviar">
-                <input type="submit" name="return" class="btn returnbtn" id="cancelbtn" value="Return"></input>
-                <input type="submit" name="submit" class="btn submitbtn" id="loginbtn" value="Submit"></input>
-            </div>
-        </form>
+            <input type="hidden" name="id" value="<?= isset($this->employee) ? $this->employee['id'] : '' ?>" >
+
+            <input type="submit" class="w-30 btn btn-dark mt-5 mr-3" value="<?= isset($this->employee) ? 'Update' : 'Create' ?>" name="employeePage">
+            <a class="w-30 btn btn-dark mt-5" href="<?=URL?>dashboard">Go Back</a>
+            </form>
+        </div>
     </section>
 </body>
 </html>

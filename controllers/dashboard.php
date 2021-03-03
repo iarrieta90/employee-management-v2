@@ -10,7 +10,7 @@ class Dashboard extends Controller
     }
 
     function getEmployees(){
-        $employeesList =  $this->model->get();
+        $employeesList =  $this->model->getAll();
         $employeesList = json_encode($employeesList);
         header('Content-Type: application/json');
         echo $employeesList;
@@ -35,6 +35,16 @@ class Dashboard extends Controller
     function render()
     {
         $this->view->render('dashboard/index');
+    }
+    function employee($param = null) {
+        $id = $param[0];
+        $employee = $this->model->getById($id);
+        echo '<br>';
+        foreach ($employee as $key) {
+            $employee = $key;
+        }
+        $this->view->employee = $employee;
+        $this->view->render('employee/index');
     }
 }
 
