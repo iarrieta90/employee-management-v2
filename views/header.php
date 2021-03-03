@@ -4,13 +4,13 @@
     </section>
     <ul class="nav-links">
         <li>
-            <a href="<?php echo constant('URL'); ?>login?logout='true'">Login</a>
+            <a href="<?=URL?>login?logout='true'">Login</a>
         </li>
         <li>
-            <a href="<?php echo constant('URL'); ?>dashboard">Dashboard</a>
+            <a href="<?=URL?>dashboard">Dashboard</a>
         </li>
         <li>
-            <a href="<?php echo constant('URL'); ?>employee">Employee</a>
+            <a href="<?=URL?>dashboard/employee">Employee</a>
         </li>
     </ul>
 
@@ -21,6 +21,6 @@
         </form>
     </section>
     <section class="logout-container">
-        <a href="<?php echo constant('URL'); ?>login?logout='true'"><button class="logoutBtn" id="logout"> Log Out </button></a>
+        <a href="<?=URL?>login?logout='true'"><button class="logoutBtn" id="logout"> Log Out </button></a>
     </section>
 </header>

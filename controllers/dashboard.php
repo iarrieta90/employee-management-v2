@@ -22,6 +22,7 @@ class Dashboard extends Controller
 
     }
     function createEmployee() {
+        print_r($_POST);
         $this->model->create($_POST);
     }
 
@@ -38,14 +39,18 @@ class Dashboard extends Controller
     }
 
     function employee($param = null) {
-        $id = $param[0];
-        $employee = $this->model->getById($id);
-        echo '<br>';
-        foreach ($employee as $key) {
-            $employee = $key;
+        if($param) {
+            $id = $param[0];
+            $employee = $this->model->getById($id);
+            echo '<br>';
+            foreach ($employee as $key) {
+                $employee = $key;
+            }
+            $this->view->employee = $employee;
+            $this->view->render('employee/index');
+        } else {
+            $this->view->render('employee/index');
         }
-        $this->view->employee = $employee;
-        $this->view->render('employee/index');
     }
 
     function employeeProfile()
@@ -57,11 +62,11 @@ class Dashboard extends Controller
         switch ($_SERVER['REQUEST_METHOD']) {
             case 'PUT':
                 $this->updateEmployee();
-                $this->render('dashboard/index');
+                header('Location:' . URL . 'dashboard');
             break;
             case 'POST':
                 $this->createEmployee();
-                $this->render('dashboard/index');
+                header('Location:' . URL . 'dashboard');
             break;
         }
     }
