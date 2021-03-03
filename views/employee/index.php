@@ -21,8 +21,13 @@
     <?php include_once 'views/header.php'; ?>
     <?php require_once 'controllers/dashboard.php'; ?>
     <section id="form-wrapper">
+        <?php $image =  $this->employee['avatar'] == 'assets/images/no-user.png' ? URL . $this->employee['avatar'] : $this->employee['avatar'] ;?>
         <div class="container overflow-hidden">
-            <form class="needs-validation" action="<?=URL?>dashboard/employeeProfile" method="POST">
+            <form class="needs-validation" action="<?=URL?>dashboard/employeeProfile" method="POST">    
+            <img src="<?= isset($this->employee) ? $image : URL . "assets/images/no-user.png" ?>" class="img_profile" alt="avatar">
+            <div class="container_avatar">
+            <?php include_once 'views/imageGallery.php'; ?>
+            </div>
             <h4 class="mb-3"><?= isset($this->employee) ? $this->employee['name'] . "'s profile" : "New employee" ?></h4>
             <input type="hidden" name="_method" value="<?= isset($this->employee) ? "PUT" : "POST" ?>">
             <div class="row">
