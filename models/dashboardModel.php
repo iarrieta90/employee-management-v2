@@ -24,13 +24,24 @@ class DashboardModel extends Model
         }
     }
 
-    function delete()
+    function delete($id)
     {
+        try {
+            $query = $this->db->connect()->prepare("DELETE FROM employees WHERE id = :id");
+            $query->execute([
+                'id' => $id
+            ]);
+            return true;
+
+        } catch (PDOException $e) {
+            print_r('Connection error: ' . $e->getMessage());
+            return false;
+        }
     }
     function create($newEmployee)
     {
         try {
-            $query = $this->db->connect()->prepare("INSERT INTO employees 
+            $query = $this->db->connect()->prepare("INSERT INTO employees
             (name, email, age, streetAddress, city, state, postalCode, phoneNumber) VALUES 
             (:name, :email, :age, :streetAddress, :city, :state, :postalCode, :phoneNumber)");
 
@@ -42,7 +53,7 @@ class DashboardModel extends Model
                     'streetAddress' => $newEmployee['streetAddress'],
                     'city' => $newEmployee['city'],
                     'state' => $newEmployee['state'],
-                    'postalCode' => $newEmployee['PC'],
+                    'postalCode' => $newEmployee['postalCode'],
                     'phoneNumber' => $newEmployee['phoneNumber'],
                 ]
             );
@@ -53,19 +64,45 @@ class DashboardModel extends Model
         }
     }
 
-    function update()
+
+    function update($updateEmployee)
     {
+        try {
+            $query = $this->db->connect()->prepare("UPDATE employees SET 
+            name = :name, lastName = :lastName, email = :email, gender = :gender, age = :age, streetAddress = :streetAddress, city = :city, state = :state, postalCode = :postalCode, phoneNumber = :phoneNumber, avatar = :avatar
+            WHERE id = :id");
+            $query->execute([
+                'id' => $updateEmployee['id'],
+                'name' => $updateEmployee['name'],
+                'lastName' => $updateEmployee['lastName'],
+                'email' => $updateEmployee['email'],
+                'gender' => $updateEmployee['gender'],
+                'age' => $updateEmployee['age'],
+                'streetAddress' => $updateEmployee['streetAddress'],
+                'city' => $updateEmployee['city'],
+                'state' => $updateEmployee['state'],
+                'postalCode' => $updateEmployee['postalCode'],
+                'phoneNumber' => $updateEmployee['phoneNumber'],
+                'avatar' => $updateEmployee['avatar']
+            ]);
+            return true;
+
+        } catch (PDOException $e) {
+            print_r('Connection error: ' . $e->getMessage());
+            return false;
+        }
+
     }
 
     function employee()
     {
     }
 
-    // function getQueryStringParameters()
-    // {
-    //     parse_str(file_get_contents("php://input"), $query);
-    //     return $query;
-    // }
+    function getQueryStringParameters()
+    {
+        parse_str(file_get_contents("php://input"), $query);
+        return $query;
+    }
 
 }
 

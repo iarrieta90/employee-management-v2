@@ -80,6 +80,7 @@ export const helpers = {
       fields: [
         {
           name: 'name',
+          title: 'Name',
           type: 'text',
           width: 150,
           validate: 'required',
@@ -87,6 +88,7 @@ export const helpers = {
         },
         {
           name: 'email',
+          title: 'Email',
           type: 'text',
           width: 200,
           validate: 'required',
@@ -94,6 +96,7 @@ export const helpers = {
         },
         {
           name: 'age',
+          title: 'Age',
           type: 'number',
           width: 50,
           validate: 'required',
@@ -101,6 +104,7 @@ export const helpers = {
         },
         {
           name: 'streetAddress',
+          title: 'Adress',
           type: 'text',
           width: 200,
           validate: 'required',
@@ -108,6 +112,7 @@ export const helpers = {
         },
         {
           name: 'city',
+          title: 'City',
           type: 'text',
           width: 200,
           validate: 'required',
@@ -115,13 +120,15 @@ export const helpers = {
         },
         {
           name: 'state',
+          title: 'State',
           type: 'text',
           width: 50,
           validate: 'required',
           align: 'center',
         },
         {
-          name: 'PC',
+          name: 'postalCode',
+          title: 'PC',
           type: 'number',
           width: 70,
           validate: 'required',
@@ -129,6 +136,7 @@ export const helpers = {
         },
         {
           name: 'phoneNumber',
+          title: 'Telephone',
           type: 'number',
           width: 100,
           validate: 'required',

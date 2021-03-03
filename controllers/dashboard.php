@@ -20,6 +20,17 @@ class Dashboard extends Controller
         $this->model->create($_POST);
     }
 
+    function deleteEmployee() {
+        $query = $this->model->getQueryStringParameters();
+        print_r($query['data']);
+        $this->model->delete($query['data']);
+    }
+
+    function updateEmployee() {
+        $query = $this->model->getQueryStringParameters();
+        print_r($query);
+        $this->model->update($query);
+    }
 
     function render()
     {
