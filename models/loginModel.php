@@ -7,7 +7,6 @@
         }
 
         public function get($user){
-         
             try {
                 $query = $this->db->connect()->prepare('SELECT * FROM users WHERE email = :email');
                 $query->execute(['email' => $user['email']]);

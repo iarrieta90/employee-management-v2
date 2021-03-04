@@ -1,54 +1,92 @@
 <?php
 
-require_once 'controllers/errors.php';
+
 class App
 {
 
+  protected $url;
+  protected $controller;
+  protected $method;
+  protected $params;
+
+
   function __construct()
   {
-    $url = isset($_GET['url']) ? $_GET['url'] : null;
-    $url = rtrim($url, '/');
-    $url = explode('/', $url);
+    $this->setUrl();
+    $this->setController();
+    $this->setMethod();
+    $this->setParams();
+  }
 
-
-    if (empty($url[0])) {
-      $url[0] = 'login';
-    }
-    session_start();
-    // session_destroy();
-    if (isset($_SESSION['life'])) {
-      if ((time() - $_SESSION['start'] > $_SESSION['life']) && !($url[0] == "login" && $url[1] == "timeout")) {
-        header("Location: " . URL . "login/timeout");
-        die;
-      } else if ($url[0] == 'login' && !($url[1])) {
-        header("Location: " . URL . "dashboard");
-        die;
-      }
-    } else if (!($url[0] == "login" || ($url[0] == "login" && $url[1] == "checkLogin"))) {
-      header("Location: " . URL);
-      die;
-    }
-
-    $controllerRoute = 'controllers/' . $url[0] . '.php';
+  function routing()
+  {
+    $controllerRoute = 'controllers/' . $this->controller . '.php';
     if (file_exists($controllerRoute)) {
       require_once $controllerRoute;
-      $controller = new $url[0];
-      $controller->loadModel($url[0]);
-      $nparam = sizeof($url);
-      if ($nparam > 2) {
-        $param = [];
-        for ($i = 2; $i < $nparam; $i++) {
-          array_push($param, $url[$i]);
-        }
-        $controller->{$url[1]}($param);
-      } else if ($nparam > 1) {
-        $controller->{$url[1]}();
+      $controller = new $this->controller;
+      $controller->loadModel($this->controller);
+      if ($this->params) {
+        $controller->{$this->method}($this->params);
+      } else if ($this->method) {
+        $controller->{$this->method}();
       } else {
         $controller->render();
       }
     } else {
-      $controller = new Errors();
+      require_once 'controllers/errors.php';
+      new Errors();
     }
   }
 
+  function getUrl()
+  {
+    return $this->url;
+  }
+
+  function getController()
+  {
+    return $this->controller;
+  }
+
+  function getMethod()
+  {
+    return $this->method;
+  }
+
+  function getParams()
+  {
+    return $this->params;
+  }
+
+  function arrayParams($url)
+    {
+        $param = [];
+        for ($i = 2; $i < sizeof($url); $i++) {
+            array_push($param, $url[$i]);
+        }
+        return $param;
+    }
+
+  function setUrl()
+  {
+    $url = isset($_GET['url']) ? $_GET['url'] : null;
+    $url = rtrim($url, '/');
+    $url = explode('/', $url);
+    $this->url = $url;
+  }
+
+  function setController()
+    {
+        $this->controller = !(empty($this->url[0])) ? $this->url[0] : "login";
+    }
+
+    function setMethod()
+    {
+        $this->method = !(empty($this->url[1])) ? $this->url[1] : null;
+    }
+
+    function setParams()
+    {
+        $this->params = sizeof($this->url) > 2 ? $this->arrayParams($this->url) : null;
+    }
 }

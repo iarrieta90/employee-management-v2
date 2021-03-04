@@ -7,7 +7,6 @@ class Dashboard extends Controller
     function __construct()
     {
         parent::__construct();
-        $this->view->message = "";
     }
 
     function render()
@@ -15,14 +14,12 @@ class Dashboard extends Controller
         $this->view->render('dashboard/index');
     }
 
-
     function getEmployees()
     {
-        $employeesList =  $this->model->getAll();
-        $employeesList = json_encode($employeesList);
         header('Content-Type: application/json');
-        echo $employeesList;
+        echo json_encode($this->model->getAll());
     }
+
     function createEmployee()
     {
         $this->view->message = $this->model->create($_POST) ? "employee created correctly" : "employee couldn't be created";
