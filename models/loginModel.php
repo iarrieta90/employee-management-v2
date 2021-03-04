@@ -6,13 +6,13 @@
             parent::__construct();
         }
 
-        public function get($email,$password){
+        public function get($user){
          
             try {
                 $query = $this->db->connect()->prepare('SELECT * FROM users WHERE email = :email');
-                $query->execute(['email' => $email]);
+                $query->execute(['email' => $user['email']]);
                 $dataUser = $query->fetch();
-                if(password_verify($password, $dataUser['password'])){
+                if(password_verify($user['password'], $dataUser['password'])){
                     return $dataUser;
                 } else {
                     echo "incorrect email or password";
@@ -25,28 +25,7 @@
             }
         }
 
-        function startSession($userLogin){
-            session_start();
-            $_SESSION['id'] = $userLogin['id'];
-            $_SESSION['start'] = time();
-            $_SESSION['duration'] = 600;
-        }
 
-        function closeUserSession($sessionTime, $sessionDuration){
-            if($sessionTime >= $sessionDuration){
-                session_start();
-                session_destroy();
-                header("Location: ../index.php");
-                exit();
-            }
-        }
 
 
     }
-
-   
-    // function setErrorMessage($message){
-    //     $url = $message? "?login=$message" : "";
-    //     header("Location: ../../index.php$url");
-    //     exit();
-    // }

@@ -6,15 +6,13 @@ class App
 
     function __construct()
     {
-        // session_destroy();
         $url = isset($_GET['url']) ? $_GET['url'] : null;
         $url = rtrim($url, '/');
         $url = explode('/', $url);
 
-        // $login = new Session();
-        // var_dump($login);
+        $login = new Session();
 
-        // if ($login->isLoggedIn($url[0].'/checkLogin')) {
+        if ($login->isLoggedIn($url[0].'/checkLogin')) {
             if (empty($url[0])) {
                 require_once 'controllers/login.php';
                 $controller = new Login();
@@ -42,14 +40,14 @@ class App
                 }
             }
 
-        
-        // } else {
-        //     $controllerPath = 'controllers/login.php';
-        //     require_once $controllerPath;
-        //     $controller = new Login();
-        //     $controller->loadModel($url[0]);
-        //     $controller->render('login/index');
 
-        // }
+        } else {
+            $controllerPath = 'controllers/login.php';
+            require_once $controllerPath;
+            $controller = new Login();
+            $controller->loadModel($url[0]);
+            $controller->render('login/index');
+
+        }
     }
 }

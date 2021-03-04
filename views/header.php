@@ -18,6 +18,6 @@
         </form>
     </section>
     <section class="logout-container">
-        <a href="<?=URL?>login?logout='true'"><button class="logoutBtn" id="logout"> Log Out </button></a>
+        <a href="<?=URL?>login/logOut"><button class="logoutBtn" id="logout"> Log Out </button></a>
     </section>
 </header>
