@@ -20,7 +20,11 @@
 </head>
 
 <body>
-    <?php include_once('views/header.php'); ?>
+    <header class="header">
+        <section class="title">
+            <h4>Employees Manager</h4>
+        </section>
+    </header>
     <div class="toast-msg">
     <?php 
         if(isset($this->message)){

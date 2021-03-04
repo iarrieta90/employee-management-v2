@@ -36,8 +36,8 @@
     </main>
     <?php require_once 'views/footer.php'; ?>
     <script>
+        const page = 'users';
         const URL = '<?= URL ?>';
-        const page = 'dashboard';
     </script>
     <script type="module" src="<?= URL ?>assets/js/index.js"></script>
     <script>

@@ -145,5 +145,57 @@ export const helpers = {
       ],
     };
   },
-  
+  userGrid: function (userList) {
+    return {
+      width: '100%',
+      height: 'auto',
+      inserting: false,
+      editing: false,
+      sorting: true,
+      paging: false,
+      datatype: 'json',
+      deleteConfirm: 'Do you really want to delete the client?',
+      data: userList,
+      editRowRenderer: null,
+
+      onItemDeleting: function (args) {
+        deleteMethod
+        .url('deleteUser', args.item.id, page)
+        .done(() => {
+          $('.toast-msg').html(`
+              <div class='toast' role='alert' aria-live='assertive' aria-atomic='true'>
+                <div class='toast-body'>
+                  User deleted correctly
+                </div>
+              </div>
+              
+              <script>
+                $(".toast").toast({
+                delay: 3000
+                });
+                $(".toast").toast('show');
+              </script>`);
+        });
+      },
+      fields: [
+        {
+          name: 'name',
+          title: 'Name',
+          type: 'text',
+          width: 150,
+          validate: 'required',
+          align: 'center',
+        },
+        {
+          name: 'email',
+          title: 'Email',
+          type: 'text',
+          width: 200,
+          validate: 'required',
+          align: 'center',
+        },
+        { type: 'control', },
+      ],
+    };
+  },
 };

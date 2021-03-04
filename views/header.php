@@ -9,6 +9,14 @@
         <li>
             <a href="<?=URL?>dashboard/employee">Employee</a>
         </li>
+        <?= $_SESSION['name'] == 'admin' ? "
+        <li>
+            <a href='" . URL . "users'>Users</a>
+        </li>
+        <li>
+            <a href='" . URL . "users/newUser'>Create User</a>
+        </li>"
+            : "" ?>
     </ul>
 
     <section class="searchBar-container">

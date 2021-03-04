@@ -1,5 +1,5 @@
 <footer class="footer-ass">
-  <p>&copy; 2020 Irati Arrieta, Veronica Velazquez and Raúl Cátedra.</p>
+  <p>&copy; Froilán Olesti and Anna Troyan with collaboration of Irati Arrieta and Verónica Velázquez</p>
 </footer>
 
 <script src="<?=URL?>node_modules/bootstrap/dist/js/bootstrap.min.js"></script>

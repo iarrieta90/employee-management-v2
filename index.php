@@ -21,13 +21,13 @@ if (isset($_SESSION['life'])) {
     if ((time() - $_SESSION['start'] > $_SESSION['life']) && !($app->getController() == "login" && $app->getMethod() == "timeout")) {
         header("Location: " . URL . "login/timeout");
         die;
-    } else if ($app->getController() == 'login' && !($app->getMethod())) {
+    } else if ($app->getController() == 'login' && !($app->getMethod()) || ($_SESSION['name'] != 'admin' && $app->getController() == "users")) {
         header("Location: " . URL . "dashboard");
         die;
     }
-    } else if (!($app->getController() == "login" || ($app->getController() == "login" && $app->getMethod() == "checkLogin"))) {
-        header("Location: " . URL);
-        die;
+} else if (!($app->getController() == "login" || ($app->getController() == "login" && $app->getMethod() == "checkLogin"))) {
+    header("Location: " . URL);
+    die;
 }
 
 $app->routing();

@@ -44,6 +44,7 @@
 
         function saveSession($userLogin){
             $_SESSION['id'] = $userLogin['id'];
+            $_SESSION['name'] = $userLogin['name'];
             $_SESSION['start'] = time();
             $_SESSION['life'] = 600;
     
