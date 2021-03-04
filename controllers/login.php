@@ -7,20 +7,20 @@
             $this->view->mensaje = "";
         }
 
+        function render(){
+            $this->view->render('login/index');
+        }
 
         function checkLogin(){
             if(isset($_POST['email']) && isset($_POST['password'])){
                 if($userLogin = $this->model->get($_POST)){
-                    $session = new Session;
-                    $istrue = $session->startSession($userLogin);
-                    if($istrue) {
-                        $this->view->render('dashboard/index');
-                        header('Location:' . URL . 'dashboard');
-                    }
+                    $this->saveSession($userLogin);
+                    header('Location:' . URL . 'dashboard');
+
                  } else {
-                    //  $this->view->message = "Login incorrect";
-                    //  echo "login incorrect";
-                    //  $this->view->render();
+                     $this->view->message = "incorrect email or password";
+                     $this->view->render('login/index');
+                     
                  }
 
             }
@@ -28,12 +28,26 @@
 
         function logOut()
         {
-            session_start();
             session_destroy();
+            $this->view->message = "logged out correctly";
+            $this->view->render('login/index');
+
         }
 
-        function render(){
+        function timeout()
+        {
+            session_destroy();
+            $this->view->message = "session expired!";
             $this->view->render('login/index');
+
+        }
+
+        function saveSession($userLogin){
+            $_SESSION['id'] = $userLogin['id'];
+            $_SESSION['start'] = time();
+            $_SESSION['life'] = 600;
+    
+            return true;
         }
 
     }

@@ -15,7 +15,6 @@
                 if(password_verify($user['password'], $dataUser['password'])){
                     return $dataUser;
                 } else {
-                    echo "incorrect email or password";
                     return false;
                 }
 

@@ -22,7 +22,7 @@
     <?php include_once 'views/header.php';?>
     <div class="toast-msg">
         <?php 
-        if($this->message != ""){
+        if(isset($this->message) && $this->message != ""){
 
            echo "<div class='toast' role='alert' aria-live='assertive' aria-atomic='true'>
             <div class='toast-body'>" .
