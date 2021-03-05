@@ -52,8 +52,8 @@ So if you want to develop this extra feature it would be cool to have a mocked r
 For contributions, please fork the project, change whatever you want and create a pull request with the new content.
 
 ### Authors ✒️
-- **Irati Arrieta** - [iarrieta90](https://github.com/iarrieta90)
 - **Verónica Velázquez** - [vvelazquezc](https://github.com/vvelazquezc)
+- **Irati Arrieta** - [iarrieta90](https://github.com/iarrieta90)
 
 ### License 📄
 This project is under GNU license
