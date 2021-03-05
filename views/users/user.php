@@ -20,7 +20,7 @@
 <body>
   <?php include_once 'views/header.php'; ?>
 
-    <form ction="<?= URL ?>users/userProfile" method="POST" class="login__form">
+    <form action="<?= URL ?>users/userProfile" method="POST" class="login__form">
       <div class="login__form-div row">
           <label for="uEmail" class="login__form-div-label">Email: </label>
           <input type="email" class="login__form-div-input" id="uEmail" name="email" required>
