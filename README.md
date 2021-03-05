@@ -1,30 +1,30 @@
 # PHP BASIC APPLICATION TO MANAGE AN EMPLOYEES LIST
 
-## Application main points
+### Project overview
 
-1. Login and logout with a json file as user storage
-2. Controlled user session set to 10 minutes
-3. Show data from a JSON in a JS Grid
-4. Pagination of the data configured by the grid
-5. Employees CRUD Create Read Delete and Update with a json file as employees storage
-6. Employee page with employee detail
-7. External web service to get employees images
-8. Employee avatar through web service images
+This project is an approach to an employees management application that could be used in a comany to keep records of their employees. It is developed using an MVC architecture and object-oriented programming, and is a refractor of a previous project developed with procedural programming, where we updted the whole structure and added some new functionalities.
+
+## Application functionalities
+
+1. Session login and logout
+2. Login as user or admin
+3. Admin has rights to create new users
+4. Controlled user session set to 10 minutes
+5. Show data from database in JSGrid (both for employee records on "dashboard" page, and user records on "users" page)
+6. Pagination of the data configured by the grid
+7. Employees and Users CRUD (Create Read Delete and Update) synchronized with database
+8. Employees and Users CRUD managed with both PHP and JS ajax
+9. Employee page with employee detail and the ability to update its data
+10. User page with user detail and the ability to update its data
+11. Connection with external api to get avatars and set them as employees profile image on the "employee" page
 
 ### File structure
 
-This file structure has a specific purpose. So you have to implement all the required over it. Later when we get to OPP and MySQL we will refactor the project to get it more sophisticated, modern and cleaner. Please take care of it!!
+The project's file structure is the following:
 
-```
-assets/
-resources/
-src/
- /library
-```
-
-- Assets contains html, css, js & images
-- Css just css files.
-- Resources folder contains users.json and employees.json
+- Assets: contains css, js & images
+- 
+- Resources: contains 
 - Src folder contains PHP files which contain HTML or JS
 - Src/library folder contains PHP files that contain just PHP
 
