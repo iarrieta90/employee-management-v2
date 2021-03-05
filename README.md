@@ -1,6 +1,6 @@
 # PHP EMPLOYEE MANAGEMENT V2
 
-### Project overview
+### Project overview 📋
 
 This project is an approach to an employees management application that could be used in a comany to keep records of their employees. It is developed using an MVC architecture and object-oriented programming, and is a refractor of a previous project developed with procedural programming, where we updted the whole structure and added some new functionalities.
 
@@ -31,7 +31,7 @@ The project's file structure is the following:
 - **Resources:** contains a sql file with the DB configuration
 - **Views:** contains all application views
 
-### External libraries
+### Built with 🛠️
 You will need to npm install the following dependencies in order the project to work properly:
 
 - [Bootstrap](https://getbootstrap.com/)
@@ -55,7 +55,7 @@ For contributions, please fork the project, change whatever you want and create 
 - **Irati Arrieta** - [iarrieta90](https://github.com/iarrieta90)
 - **Verónica Velázquez** - [vvelazquezc](https://github.com/vvelazquezc)
 
-###License 📄
+### License 📄
 This project is under GNU license
 
 ---
