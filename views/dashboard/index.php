@@ -21,15 +21,14 @@
 
     <?php include_once 'views/header.php';?>
     <div class="toast-msg">
-        <?php 
-        if(isset($this->message) && $this->message != ""){
-
-           echo "<div class='toast' role='alert' aria-live='assertive' aria-atomic='true'>
-            <div class='toast-body'>" .
-              $this->message .
+        <?= 
+        isset($this->message) && $this->message != "" ?
+            "<div class='toast' role='alert' aria-live='assertive' aria-atomic='true'>
+                <div class='toast-body'>" .
+                $this->message .
             "</div>
-          </div>";
-        }
+          </div>" : "";
+        
         ?>
     </div>
     <main id="main-wrapper">

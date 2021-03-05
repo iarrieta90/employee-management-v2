@@ -1,5 +1,5 @@
 <footer class="footer-ass">
-  <p>&copy; Froilán Olesti and Anna Troyan with collaboration of Irati Arrieta and Verónica Velázquez</p>
+  <p>&copy; Made by Irati Arrieta and Verónica Velázquez based on a project by Froilán Olesti and Anna Troyan</p>
 </footer>
 
 <script src="<?=URL?>node_modules/bootstrap/dist/js/bootstrap.min.js"></script>

@@ -26,3 +26,12 @@
     font-size: 2rem;
     font-weight: 600;
 }
+
+.toast {
+  position: absolute;
+  top: 5px;
+  right: 0;
+  left: 0;
+  text-align: center;
+  margin: 0 auto;
+}
