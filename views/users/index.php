@@ -32,7 +32,8 @@
         }
         ?>
     </div>
-    <main id="main-wrapper">
+    <main class="main">
+        <section id="main-wrapper"></section>
     </main>
     <?php require_once 'views/footer.php'; ?>
     <script>

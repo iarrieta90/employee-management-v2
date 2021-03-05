@@ -18,35 +18,28 @@
 </head>
 
 <body>
-    <?php include_once 'views/header.php'; ?>
-<section id="form-wrapper" class="center">
-  <div class="container overflow-hidden">
-    <form class="needs-validation" action="<?= URL ?>users/userProfile" method="POST">
-  </div>
+  <?php include_once 'views/header.php'; ?>
 
-  <div class="col-sm-6 p-2">
-    <label for="uEmail" class="form-label">Email: </label>
-    <input type="email" class="form-control" id="uEmail" name="email" required>
-  </div>
+    <form ction="<?= URL ?>users/userProfile" method="POST" class="login__form">
+      <div class="login__form-div row">
+          <label for="uEmail" class="login__form-div-label">Email: </label>
+          <input type="email" class="login__form-div-input" id="uEmail" name="email" required>
 
-  <div class="col-sm-6 p-2">
-    <label for="uName" class="form-label">Rol: </label><br>
-    <select class="form-control" id="uName" name="name" required>
-      <option value="user" selected>User</option>
-      <option value="admin">Admin</option>
-    </select>
-  </div>
+          <label for="uName" class="login__form-div-label">Rol: </label><br>
+          <select class="login__form-div-input" id="uName" name="name" required>
+            <option value="user" selected>User</option>
+            <option value="admin">Admin</option>
+          </select>
 
-  <div class="col-sm-6 p-2">
-    <label for="uPassword" class="form-label">Password: </label>
-    <input type="password" class="form-control" id="uPassword" name="password" required>
-  </div>
+          <label for="uPassword" class="login__form-div-label">Password: </label>
+          <input type="password" class="login__form-div-input" id="uPassword" name="password" required>
 
-  <input type="submit" class="w-30 btn btn-dark mt-5 mr-3">
-  <a class="w-30 btn btn-dark mt-5" href="<?= URL ?>users">Go Back</a>
-  </form>
-  </div>
-</section>
+            <input type="submit" class="btn loginbtn" value="Create user">
+            <a class="btn loginbtn" href="<?= URL ?>users">Go Back</a>
+
+        </div>
+      </div>
+    </form>
 </body>
 
 </html>

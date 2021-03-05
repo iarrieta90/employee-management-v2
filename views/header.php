@@ -19,12 +19,6 @@
             : "" ?>
     </ul>
 
-    <section class="searchBar-container">
-        <form class="searchBar" action="" method="get">
-            <input id="headerSearch" class="searchBar__input" type="text" name="searchValue" required>
-            <button class="searchBar__submit" id="searchBtn" type="submit"><i class="fa fa-search"></i></button>
-        </form>
-    </section>
     <section class="logout-container">
         <a href="<?=URL?>login/logOut"><button class="logoutBtn" id="logout"> Log Out </button></a>
     </section>
